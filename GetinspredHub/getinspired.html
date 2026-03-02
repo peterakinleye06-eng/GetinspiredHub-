@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GetInspiredHub — Inspire. Motivate. Grow.</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #FAF7F2;
+    --warm: #F5EDE0;
+    --rust: #C8553D;
+    --gold: #D4A853;
+    --forest: #2D4A3E;
+    --dark: #1A1A18;
+    --mid: #6B6860;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--dark);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.4rem 5vw;
+    background: rgba(250,247,242,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,85,61,0.12);
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--forest);
+    letter-spacing: -0.5px;
+  }
+  .logo span { color: var(--rust); }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--mid);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--rust); }
+
+  .nav-cta {
+    background: var(--rust);
+    color: white !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 2rem;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 5vw 4rem;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -20%; right: -10%;
+    width: 55vw; height: 80vh;
+    background: radial-gradient(ellipse, rgba(212,168,83,0.18) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero-text { animation: fadeUp 0.9s ease both; }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 1.2rem;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--rust);
+    border-radius: 2rem;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -1.5px;
+    margin-bottom: 1.5rem;
+    color: var(--dark);
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--rust);
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: var(--mid);
+    max-width: 460px;
+    margin-bottom: 2.5rem;
+  }
+
+  .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    border-radius: 3rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.25s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary { background: var(--rust); color: white; }
+  .btn-primary:hover { background: #b34732; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,85,61,0.35); }
+  .btn-outline { background: transparent; color: var(--forest); border: 1.5px solid var(--forest); }
+  .btn-outline:hover { background: var(--forest); color: white; }
+
+  .hero-image {
+    animation: fadeUp 0.9s 0.2s ease both;
+    position: relative;
+  }
+
+  .image-stack {
+    position: relative;
+    height: 520px;
+  }
+
+  .img-card {
+    position: absolute;
+    border-radius: 1.2rem;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  }
+
+  .img-card-main {
+    width: 75%; height: 420px;
+    top: 0; right: 0;
+    background: linear-gradient(145deg, var(--forest), #1a3329);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .img-card-accent {
+    width: 48%; height: 240px;
+    bottom: 0; left: 0;
+    background: linear-gradient(145deg, var(--rust), #a03420);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .card-inner {
+    padding: 2rem;
+    color: white;
+    text-align: center;
+  }
+
+  .big-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    line-height: 1;
+    opacity: 0.3;
+    margin-bottom: 0.5rem;
+  }
+
+  .quote-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    line-height: 1.5;
+    opacity: 0.9;
+    margin-bottom: 1rem;
+  }
+
+  .quote-source {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+
+  .stat-pill {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border-radius: 2rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    margin-top: 1rem;
+  }
+
+  /* ── CATEGORIES ── */
+  .categories {
+    padding: 5rem 5vw;
+    background: var(--warm);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+  }
+
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .cat-card {
+    background: white;
+    border-radius: 1.2rem;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: 1.5px solid transparent;
+  }
+
+  .cat-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--rust);
+    box-shadow: 0 16px 40px rgba(200,85,61,0.12);
+  }
+
+  .cat-icon {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .cat-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--dark);
+  }
+
+  .cat-desc {
+    font-size: 0.85rem;
+    color: var(--mid);
+    line-height: 1.6;
+  }
+
+  .cat-count {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.75rem;
+    color: var(--rust);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── FEATURED POSTS ── */
+  .featured {
+    padding: 6rem 5vw;
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 1.8rem;
+    margin-top: 3.5rem;
+  }
+
+  .post-card {
+    background: white;
+    border-radius: 1.2rem;
+    overflow: hidden;
+    transition: all 0.3s;
+    cursor: pointer;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  }
+
+  .post-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); }
+
+  .post-thumb {
+    height: 200px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .post-thumb.motivation { background: linear-gradient(135deg, #2D4A3E, #4a7a6a); }
+  .post-thumb.parenting { background: linear-gradient(135deg, #C8553D, #e8794a); }
+  .post-thumb.relationship { background: linear-gradient(135deg, #D4A853, #c48830); }
+  .post-thumb.inspiration { background: linear-gradient(135deg, #4a3a7a, #7a5abc); }
+
+  .post-thumb-main { height: 260px; }
+
+  .thumb-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 1rem;
+    line-height: 1.3;
+  }
+
+  .post-body { padding: 1.5rem; }
+
+  .post-tag {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 0.6rem;
+    display: block;
+  }
+
+  .post-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.35;
+    margin-bottom: 0.7rem;
+    color: var(--dark);
+  }
+
+  .post-card.featured-main .post-title { font-size: 1.5rem; }
+
+  .post-excerpt {
+    font-size: 0.85rem;
+    color: var(--mid);
+    line-height: 1.65;
+    margin-bottom: 1rem;
+  }
+
+  .post-meta {
+    display: flex; align-items: center; gap: 0.8rem;
+    font-size: 0.78rem; color: var(--mid);
+  }
+
+  .post-meta .dot { width: 3px; height: 3px; background: var(--mid); border-radius: 50%; }
+
+  /* ── QUOTE BAND ── */
+  .quote-band {
+    background: var(--forest);
+    color: white;
+    padding: 5rem 5vw;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .quote-band::before {
+    content: '"';
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: 30rem;
+    color: rgba(255,255,255,0.03);
+    top: -8rem; left: 50%;
+    transform: translateX(-50%);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .band-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2.4rem);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.5;
+    max-width: 750px;
+    margin: 0 auto 1.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .band-author {
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+
+  /* ── NEWSLETTER ── */
+  .newsletter {
+    padding: 6rem 5vw;
+    background: var(--warm);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .nl-text h2 { margin-bottom: 1rem; }
+  .nl-text p { color: var(--mid); line-height: 1.75; margin-bottom: 0; }
+
+  .nl-form { display: flex; flex-direction: column; gap: 1rem; }
+
+  .nl-form input {
+    padding: 0.9rem 1.3rem;
+    border: 1.5px solid rgba(0,0,0,0.12);
+    border-radius: 0.6rem;
+    background: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .nl-form input:focus { border-color: var(--rust); }
+
+  .nl-form button {
+    padding: 0.9rem;
+    background: var(--rust);
+    color: white;
+    border: none;
+    border-radius: 0.6rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .nl-form button:hover { background: #b34732; transform: translateY(-1px); }
+
+  .nl-trust {
+    font-size: 0.78rem;
+    color: var(--mid);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  /* ── LIBRARY ── */
+  .library {
+    padding: 6rem 5vw;
+    background: var(--cream);
+  }
+
+  .library-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.8rem;
+    margin-top: 3.5rem;
+  }
+
+  .lib-card {
+    background: white;
+    border-radius: 1.2rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .lib-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+  }
+
+  .lib-icon {
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.8rem;
+  }
+
+  .lib-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .lib-type {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .lib-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.35;
+    margin-bottom: 0.6rem;
+    color: var(--dark);
+  }
+
+  .lib-desc {
+    font-size: 0.83rem;
+    color: var(--mid);
+    line-height: 1.65;
+    flex: 1;
+    margin-bottom: 1.2rem;
+  }
+
+  .lib-btn {
+    display: inline-block;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--forest);
+    text-decoration: none;
+    border: 1.5px solid var(--forest);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    transition: all 0.2s;
+    align-self: flex-start;
+  }
+
+  .lib-btn:hover {
+    background: var(--forest);
+    color: white;
+  }
+
+  @media (max-width: 900px) {
+    .library-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 600px) {
+    .library-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    color: rgba(255,255,255,0.5);
+    padding: 3rem 5vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  footer .logo { color: white; }
+
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding-top: 7rem; }
+    .hero-image { display: none; }
+    .cat-grid { grid-template-columns: repeat(2,1fr); }
+    .posts-grid { grid-template-columns: 1fr; }
+    .newsletter { grid-template-columns: 1fr; gap: 2.5rem; }
+    footer { flex-direction: column; text-align: center; }
+  }
+
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .cat-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">GetInspired<span>Hub</span></div>
+  <ul class="nav-links">
+    <li><a href="#">Motivation</a></li>
+    <li><a href="#">Parenting</a></li>
+    <li><a href="#">Relationships</a></li>
+    <li><a href="#library">Library</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#" class="btn nav-cta">Subscribe</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <span class="eyebrow">✦ Daily Inspiration</span>
+    <h1>Live<br>Better,<br><em>Love Deeper.</em></h1>
+    <p class="hero-sub">Your go-to space for motivation, parenting wisdom, and relationship guidance. Real stories. Real growth. Real life.</p>
+    <div class="btn-group">
+      <a href="#featured" class="btn btn-primary">Explore Articles</a>
+      <a href="#newsletter" class="btn btn-outline">Join the Community</a>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <div class="image-stack">
+      <div class="img-card img-card-main">
+        <div class="card-inner">
+          <div class="big-quote">"</div>
+          <p class="quote-text">The journey of a thousand miles begins with a single step forward.</p>
+          <span class="quote-source">— Lao Tzu</span>
+          <div class="stat-pill">✨ 12,000+ inspired readers</div>
+        </div>
+      </div>
+      <div class="img-card img-card-accent">
+        <div class="card-inner">
+          <div style="font-size:2rem;margin-bottom:0.5rem;">👨‍👩‍👧</div>
+          <p class="quote-text" style="font-size:0.95rem;">Parenting is not about perfection — it's about connection.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories" id="categories">
+  <div class="section-header reveal">
+    <span class="section-label">Browse by topic</span>
+    <h2>What inspires you today?</h2>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card reveal">
+      <span class="cat-icon">🔥</span>
+      <div class="cat-title">Motivation</div>
+      <div class="cat-desc">Fuel your drive with daily doses of encouragement and purpose.</div>
+      <span class="cat-count">24 Articles →</span>
+    </div>
+    <div class="cat-card reveal" style="transition-delay:0.1s">
+      <span class="cat-icon">💡</span>
+      <div class="cat-title">Inspiration</div>
+      <div class="cat-desc">Stories and ideas that spark creativity and ignite the spirit.</div>
+      <span class="cat-count">18 Articles →</span>
+    </div>
+    <div class="cat-card reveal" style="transition-delay:0.2s">
+      <span class="cat-icon">👨‍👩‍👦</span>
+      <div class="cat-title">Parenting</div>
+      <div class="cat-desc">Practical wisdom for raising confident, kind, and resilient kids.</div>
+      <span class="cat-count">31 Articles →</span>
+    </div>
+    <div class="cat-card reveal" style="transition-delay:0.3s">
+      <span class="cat-icon">❤️</span>
+      <div class="cat-title">Relationships</div>
+      <div class="cat-desc">Tips to build deeper love, communication, and lasting bonds.</div>
+      <span class="cat-count">22 Articles →</span>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED POSTS -->
+<section class="featured" id="featured">
+  <div class="section-header reveal">
+    <span class="section-label">Editor's Picks</span>
+    <h2>Stories worth your time</h2>
+  </div>
+  <div class="posts-grid">
+    <div class="post-card featured-main reveal">
+      <div class="post-thumb motivation post-thumb-main">
+        <div class="thumb-label">The Power of Starting Before You're Ready</div>
+      </div>
+      <div class="post-body">
+        <span class="post-tag">Motivation</span>
+        <h3 class="post-title">The Power of Starting Before You're Ready</h3>
+        <p class="post-excerpt">Waiting for the perfect moment is the greatest lie we tell ourselves. Here's why imperfect action always beats perfect inaction — and how to break the cycle today.</p>
+        <div class="post-meta">
+          <span>Peter Akinleye</span>
+          <span class="dot"></span>
+          <span>5 min read</span>
+          <span class="dot"></span>
+          <span>Feb 28</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-card reveal" style="transition-delay:0.1s">
+      <div class="post-thumb parenting">
+        <div class="thumb-label">Raising Kids Who Listen</div>
+      </div>
+      <div class="post-body">
+        <span class="post-tag">Parenting</span>
+        <h3 class="post-title">Raising Kids Who Actually Listen (Without Yelling)</h3>
+        <p class="post-excerpt">Connection before correction — the simple shift that transforms family dynamics.</p>
+        <div class="post-meta">
+          <span>Peter Akinleye</span><span class="dot"></span><span>4 min read</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="post-card reveal" style="transition-delay:0.2s">
+      <div class="post-thumb relationship">
+        <div class="thumb-label">Love Languages</div>
+      </div>
+      <div class="post-body">
+        <span class="post-tag">Relationships</span>
+        <h3 class="post-title">How to Love Someone the Way They Need to Be Loved</h3>
+        <p class="post-excerpt">Understanding your partner's love language can transform everything in 30 days.</p>
+        <div class="post-meta">
+          <span>Peter Akinleye</span><span class="dot"></span><span>6 min read</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE BAND -->
+<section class="quote-band">
+  <p class="band-quote">"You don't have to be great to start, but you have to start to be great."</p>
+  <span class="band-author">— Zig Ziglar</span>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter" id="newsletter">
+  <div class="nl-text reveal">
+    <span class="section-label">Join 12,000+ readers</span>
+    <h2>Get weekly inspiration in your inbox</h2>
+    <p>Every Monday, we send one powerful story, one parenting tip, and one relationship insight — short enough to read with your morning coffee.</p>
+  </div>
+  <div class="nl-form reveal" style="transition-delay:0.15s">
+    <input type="text" placeholder="Your first name">
+    <input type="email" placeholder="Your email address">
+    <button type="button">Yes, Inspire Me! →</button>
+    <span class="nl-trust">🔒 No spam, ever. Unsubscribe anytime.</span>
+  </div>
+</section>
+
+<!-- LIBRARY -->
+<section class="library" id="library">
+  <div class="section-header reveal">
+    <span class="section-label">Free Resources</span>
+    <h2>The Inspiration Library</h2>
+    <p style="color:var(--mid);margin-top:0.8rem;font-size:1rem;">Hand-picked reads, guides, and downloads to help you grow every day.</p>
+  </div>
+  <div class="library-grid">
+    <div class="lib-card reveal">
+      <div class="lib-icon" style="background:linear-gradient(135deg,#2D4A3E,#4a7a6a)">📘</div>
+      <div class="lib-body">
+        <span class="lib-type">Free E-Book</span>
+        <h3 class="lib-title">30 Days to a Motivated Mind</h3>
+        <p class="lib-desc">A daily challenge guide that rewires your mindset for unstoppable momentum.</p>
+        <a href="#" class="lib-btn">Download Free →</a>
+      </div>
+    </div>
+    <div class="lib-card reveal" style="transition-delay:0.1s">
+      <div class="lib-icon" style="background:linear-gradient(135deg,#C8553D,#e8794a)">🧡</div>
+      <div class="lib-body">
+        <span class="lib-type">Parenting Guide</span>
+        <h3 class="lib-title">Raising Emotionally Intelligent Kids</h3>
+        <p class="lib-desc">Practical strategies for nurturing empathy, self-awareness, and confidence in your children.</p>
+        <a href="#" class="lib-btn">Read Guide →</a>
+      </div>
+    </div>
+    <div class="lib-card reveal" style="transition-delay:0.2s">
+      <div class="lib-icon" style="background:linear-gradient(135deg,#D4A853,#c48830)">💛</div>
+      <div class="lib-body">
+        <span class="lib-type">Relationship Toolkit</span>
+        <h3 class="lib-title">The Couple's Communication Workbook</h3>
+        <p class="lib-desc">Interactive exercises to deepen understanding and resolve conflict with grace.</p>
+        <a href="#" class="lib-btn">Get Workbook →</a>
+      </div>
+    </div>
+    <div class="lib-card reveal" style="transition-delay:0.3s">
+      <div class="lib-icon" style="background:linear-gradient(135deg,#4a3a7a,#7a5abc)">✨</div>
+      <div class="lib-body">
+        <span class="lib-type">Inspiration Pack</span>
+        <h3 class="lib-title">100 Quotes That Will Change How You Think</h3>
+        <p class="lib-desc">A beautifully designed printable collection of the most powerful quotes ever written.</p>
+        <a href="#" class="lib-btn">Download Pack →</a>
+      </div>
+    </div>
+    <div class="lib-card reveal" style="transition-delay:0.4s">
+      <div class="lib-icon" style="background:linear-gradient(135deg,#3a6a8a,#5a9abc)">🎧</div>
+      <div class="lib-body">
+        <span class="lib-type">Audio Series</span>
+        <h3 class="lib-title">Morning Mindset — 5-Minute Daily Pep Talks</h3>
+        <p class="lib-desc">Start every morning with a short, powerful audio message from Peter Akinleye.</p>
+        <a href="#" class="lib-btn">Listen Free →</a>
+      </div>
+    </div>
+    <div class="lib-card reveal" style="transition-delay:0.5s">
+      <div class="lib-icon" style="background:linear-gradient(135deg,#6a3a3a,#9a5a5a)">📝</div>
+      <div class="lib-body">
+        <span class="lib-type">Worksheet</span>
+        <h3 class="lib-title">My Life Goals Clarity Worksheet</h3>
+        <p class="lib-desc">A focused one-page exercise to help you define what truly matters and map your next steps.</p>
+        <a href="#" class="lib-btn">Download Free →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">GetInspired<span style="color:var(--gold)">Hub</span></div>
+  <div class="footer-links">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Write for Us</a>
+    <a href="#">Privacy</a>
+    <a href="#">Contact</a>
+  </div>
+  <span style="font-size:0.8rem;">© 2025 GetInspiredHub. Made with ❤️</span>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+
+  // Newsletter button feedback
+  document.querySelector('.nl-form button').addEventListener('click', function() {
+    this.textContent = '🎉 You\'re in! Check your inbox.';
+    this.style.background = '#2D4A3E';
+  });
+</script>
+</body>
+</html>
